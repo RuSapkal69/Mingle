@@ -1,6 +1,7 @@
 import { create } from "zustand";
 import { axiosInstance } from "../lib/axios";
 import toast from "react-hot-toast";
+import { io } from "socket.io-client";
 
 export const useAuthStore = create((set, get) => ({
     authUser: null,
@@ -15,6 +16,7 @@ export const useAuthStore = create((set, get) => ({
         try {
             const res = await axiosInstance.get("/auth/check");
             set({ authUser: res.data});
+            get().connectSocket();
         } catch (error) {
             console.log("Error in checkAuth: ", error);
             set({ authUser: null });
@@ -60,6 +62,7 @@ export const useAuthStore = create((set, get) => ({
             await axiosInstance.post("/auth/logout");
             set({ authUser: null });
             toast.success("Logged out successfully");
+            get().disconnectSocket();
         } catch (error) {
             toast.error("Error logging out");
             console.log("Error in logout: ", error);
@@ -80,6 +83,8 @@ export const useAuthStore = create((set, get) => ({
         }
     },
 
-    connectSocket: () => {}
+    connectSocket: () => {},
+
+    disconnectSocket: () => {},
 
 }));
