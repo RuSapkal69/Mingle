@@ -60,7 +60,7 @@ const SignUpPage = () => {
                 <input 
                 type='text'
                 className={`input input-bordered w-full pl-10 ${formData.fullName.length > 0 ? 'input-success' : ''}`}
-                placeholder='John Doe'
+                placeholder='Your Good Name'
                 value={formData.fullName}
                 onChange={(e) => setFormData({...formData, fullName: e.target.value})}
                 />
@@ -78,7 +78,7 @@ const SignUpPage = () => {
               <input
               type='email'
               className={`input input-bordered w-full pl-10 ${formData.email.length > 0 ? 'input-success' : ''}`}
-              placeholder='john.doe@example.com'
+              placeholder='youremail@example.com'
               value={formData.email}
               onChange={(e) => setFormData({...formData, email: e.target.value})}
               />
